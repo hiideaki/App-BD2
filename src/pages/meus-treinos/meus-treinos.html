@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Treinos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card *ngFor="let item of treinos" (click)="abrirTreino(item)">
+    <ion-card-content>
+      <ion-card-title>{{ item.foco }}</ion-card-title>
+      <p>Treinador: {{ item.treinador }}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
