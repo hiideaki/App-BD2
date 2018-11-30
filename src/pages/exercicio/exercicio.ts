@@ -20,28 +20,23 @@ export class ExercicioPage {
   carga: any;
   reps: any;
   series: any;
+  musculo: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
-    this.dados = navParams.data;
+    this.dados = navParams.data.item;
     this.carga = this.dados.carga;
     this.reps = this.dados.reps;
     this.series = this.dados.series;
-
-    console.log(viewCtrl)
+    this.musculo = navParams.data.musculo;
 
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ExercicioPage');
   }
 
   dismiss(mudou) {
-
-    if(mudou) {
-      // Salva no BD as mudanças
-    }
-
-    let dados = { nome: this.dados.nome, carga: this.carga, series: this.series, reps: this.reps }
+    
+    let dados = { musculo: this.musculo, nome: this.dados.nome, carga: this.carga, series: this.series, reps: this.reps }
     this.viewCtrl.dismiss({ mudou, dados })
   }
 

@@ -14,6 +14,8 @@ import { MeusTreinosPage } from '../pages/meus-treinos/meus-treinos';
 import { TreinoPage } from '../pages/treino/treino';
 import { ExercicioPage } from '../pages/exercicio/exercicio';
 import { CriarTreinoPage } from '../pages/criar-treino/criar-treino';
+import { ListaExerciciosPage } from '../pages/lista-exercicios/lista-exercicios';
+import { ExercicioProvider } from '../providers/exercicio/exercicio';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { CriarTreinoPage } from '../pages/criar-treino/criar-treino';
     TreinoPage,
     ExercicioPage,
     CriarTreinoPage,
+    ListaExerciciosPage,
 
     AboutPage,
     ContactPage,
@@ -38,6 +41,7 @@ import { CriarTreinoPage } from '../pages/criar-treino/criar-treino';
     TreinoPage,
     ExercicioPage,
     CriarTreinoPage,
+    ListaExerciciosPage,
 
     AboutPage,
     ContactPage,
@@ -46,7 +50,8 @@ import { CriarTreinoPage } from '../pages/criar-treino/criar-treino';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ExercicioProvider
   ]
 })
 export class AppModule {}

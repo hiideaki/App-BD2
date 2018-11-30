@@ -31,7 +31,6 @@ export class MeusTreinosPage {
 
   
   abrirTreino(item) {
-    console.log(item)
     this.navCtrl.push(TreinoPage, item);
   }
 

@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>criar-treino</ion-title>
+    <ion-title>Criar treino</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,9 +15,45 @@
 
 <ion-content padding>
   <!-- Qual o foco do treino -->
+  <ion-item>
+    <ion-label stacked color="primary">Foco do treino</ion-label>
+    <ion-input [(ngModel)]="foco"></ion-input>
+  </ion-item>
+  <br>
+  
   <!-- Para quem é o treino -->
+  <ion-item>
+    <ion-label stacked color="primary">Aluno</ion-label>
+    <ion-input [(ngModel)]="aluno" (click)="setAluno()" disabled></ion-input>
+  </ion-item>
+  <br>
+
   <!-- Botão para adicionar exercício -->
+  <button ion-button color="primary" (click)="addExercicio()" full>Adicionar exercício</button>
+  <br>
+
   <!-- Lista com os exercicios adicionados, permitindo que o treinador os altere ou remova -->
+  <ion-card *ngFor="let grupo of listaView">
+    <ion-card-header> {{ grupo.musculo }} </ion-card-header>
+    <ion-list>
+      <button ion-item *ngFor="let item of grupo.exercicios" (click)="abrirExercicio(item, grupo.musculo)">
+          {{ item.nome }}: {{ item.carga }}kg ({{ item.series }}x{{ item.reps }})
+      </button>
+    </ion-list>
+  </ion-card>
+
   <!-- Botão para criar -->
+  
+  <!-- <h2 *ngIf="dados.foco"> {{ dados.foco }} </h2>
+  <p *ngIf="dados.treinador"> Treinador: {{ dados.treinador }} </p>
+
+  <ion-card *ngFor="let grupo of treino">
+    <ion-card-header> {{ grupo.musculo }} </ion-card-header>
+    <ion-list>
+      <button ion-item *ngFor="let item of grupo.exercicios" (click)="abrirExercicio(item, grupo.musculo)">
+          {{ item.nome }}: {{ item.carga }}kg ({{ item.series }}x{{ item.reps }})
+      </button>
+    </ion-list>
+  </ion-card> -->
 
 </ion-content>
