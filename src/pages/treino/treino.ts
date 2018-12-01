@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ActionSheetController, ToastController } from 'ionic-angular';
 import { ExercicioPage } from '../exercicio/exercicio';
 import { ExercicioProvider } from '../../providers/exercicio/exercicio';
+import { ListaExerciciosPage } from '../lista-exercicios/lista-exercicios';
 
 /**
  * Generated class for the TreinoPage page.
@@ -23,7 +24,11 @@ export class TreinoPage {
   lista: any;
   listaView: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController,
+     public navParams: NavParams,
+     private modalCtrl: ModalController,
+     private asController: ActionSheetController,
+     private toastCtrl: ToastController) {
 
     this.dados = navParams.data;
 
@@ -83,6 +88,28 @@ export class TreinoPage {
     this.listaView = this.exercicios.organizaSaida(this.lista);
   }
 
+  more(item) {
+    let toast = this.toastCtrl.create({
+      duration: 1000,
+      position: 'bottom',
+      message: "Exercício removido"
+    })
+    let c = this.asController.create({
+      buttons: [
+        {
+          text: 'Remover',
+          role: 'destructive',
+          handler: () => {
+            this.lista.splice(this.lista.findIndex((i) => i.nome === item.nome), 1);
+            this.listaView = this.exercicios.organizaSaida(this.lista)
+            toast.present();
+          }
+        }
+      ]
+    })
+    c.present();
+  }
+
   abrirExercicio(item, musculo) {
     let modal = this.modalCtrl.create(ExercicioPage, {item, musculo});
     modal.onDidDismiss((data) => {
@@ -99,10 +126,33 @@ export class TreinoPage {
     })
     modal.present();
   }
+  
+  addExercicio() {
+    let modal = this.modalCtrl.create(ListaExerciciosPage, {lista: this.lista});
+    modal.onDidDismiss((data) => {
+      if(data.mudou) {       
+        this.lista.push(data.dados);
+        this.listaView = this.exercicios.organizaSaida(this.lista);
+      }
+    })
+    modal.present();
+    
+  }
 
   salvar() {
-    console.log("Salvar no BD");
-    this.navCtrl.pop();
+    let toast = this.toastCtrl.create({
+      duration: 1000,
+      position: 'bottom'
+    })
+    if(this.lista.length > 0) {
+      console.log("Salvar no BD");
+      toast.setMessage("Treino salvo!");
+      toast.present();
+      this.navCtrl.pop();
+    } else {
+      toast.setMessage("Adicione pelo menos um exercício");
+      toast.present();
+    }
   }
 
 }

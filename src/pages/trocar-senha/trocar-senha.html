@@ -1,0 +1,39 @@
+<!--
+  Generated template for the TrocarSenhaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Alterar senha</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form #form="ngForm" (submit)="confirmar()" novalidate>
+    <ion-item>
+      <ion-label color="primary" fixed>Senha atual</ion-label>
+      <ion-input type="password" name="senhaOld" [(ngModel)]="senhaOld" clearOnEdit="false" required></ion-input>
+    </ion-item>
+    <br><br>
+
+    <ion-item>
+      <ion-label color="primary" fixed>Senha nova</ion-label>
+      <ion-input type="password" name="senhaNew" [(ngModel)]="senhaNew" clearOnEdit="false" required></ion-input>
+    </ion-item>
+    <br><br>
+
+    <ion-item>
+      <ion-label color="primary" fixed>Confirmação</ion-label>
+      <ion-input type="password" name="confSenhaNew" [(ngModel)]="confSenhaNew" clearOnEdit="false" required></ion-input>
+    </ion-item>
+    <br><br>
+
+    <button type="submit" ion-button full>Salvar</button>
+  </form>
+</ion-content>

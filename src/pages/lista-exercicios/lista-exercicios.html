@@ -18,12 +18,12 @@
   <ion-card *ngFor="let grupo of listaView">
     <ion-card-header> {{ grupo.musculo }} </ion-card-header>
     <ion-list>
-      <button ion-item *ngFor="let item of grupo.exercicios" (click)="abrirExercicio(item, grupo.musculo)">
+      <button ion-item *ngFor="let item of grupo.exercicios" (tap)="abrirExercicio(item, grupo.musculo)">
         {{ item.nome }}
       </button>
     </ion-list>
   </ion-card>
 
   <br>
-  <button ion-button color="danger" (click)="dismiss()" full>Cancelar</button>
+  <button ion-button color="danger" (tap)="dismiss()" full>Cancelar</button>
 </ion-content>

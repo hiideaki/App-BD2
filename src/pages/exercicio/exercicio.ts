@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
+import { NgForm } from '@angular/forms';
 
 /**
  * Generated class for the ExercicioPage page.
@@ -15,6 +16,8 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 })
 export class ExercicioPage {
 
+  @ViewChild("form") form: NgForm;
+
   dados: any;
 
   carga: any;
@@ -22,7 +25,7 @@ export class ExercicioPage {
   series: any;
   musculo: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private toastCtrl: ToastController) {
     this.dados = navParams.data.item;
     this.carga = this.dados.carga;
     this.reps = this.dados.reps;
@@ -34,10 +37,25 @@ export class ExercicioPage {
   ionViewDidLoad() {
   }
 
-  dismiss(mudou) {
+  save() {
+    let toast = this.toastCtrl.create({
+      duration: 1000,
+      position: "bottom"
+    })
+    if(this.form.form.valid) {
+      let dados = { musculo: this.musculo, nome: this.dados.nome, carga: this.carga, series: this.series, reps: this.reps }
+      this.viewCtrl.dismiss({ mudou: true, dados });
+      toast.setDuration(1000),
+      toast.setMessage("Exercício salvo");
+    } else {
+      toast.setMessage("Preencha todos os campos");
+    }
+    toast.present();
+  }
+
+  dismiss() {
     
-    let dados = { musculo: this.musculo, nome: this.dados.nome, carga: this.carga, series: this.series, reps: this.reps }
-    this.viewCtrl.dismiss({ mudou, dados })
+    this.viewCtrl.dismiss({ mudou: false, dados: null })
   }
 
 

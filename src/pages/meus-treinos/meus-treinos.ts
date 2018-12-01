@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TreinoPage } from '../treino/treino';
+import { UsuarioProvider } from '../../providers/usuario/usuario';
 
 
 @IonicPage()
@@ -11,9 +12,12 @@ import { TreinoPage } from '../treino/treino';
 export class MeusTreinosPage {
 
   treinos: any;
+  aluno: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    // preenchendo provisoriamente
+  constructor(public navCtrl: NavController, public navParams: NavParams, private user: UsuarioProvider) {
+    
+    this.aluno = navParams.data;
+    
     this.treinos = [
       {
         foco: "Hipertrofia",

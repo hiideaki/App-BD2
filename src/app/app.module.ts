@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
+import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { Camera } from '@ionic-native/camera';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -16,6 +19,12 @@ import { ExercicioPage } from '../pages/exercicio/exercicio';
 import { CriarTreinoPage } from '../pages/criar-treino/criar-treino';
 import { ListaExerciciosPage } from '../pages/lista-exercicios/lista-exercicios';
 import { ExercicioProvider } from '../providers/exercicio/exercicio';
+import { ListaAlunosPage } from '../pages/lista-alunos/lista-alunos';
+import { MeusAlunosPage } from '../pages/meus-alunos/meus-alunos';
+import { PerfilPage } from '../pages/perfil/perfil';
+import { UsuarioProvider } from '../providers/usuario/usuario';
+import { LoginPage } from '../pages/login/login';
+import { TrocarSenhaPage } from '../pages/trocar-senha/trocar-senha';
 
 @NgModule({
   declarations: [
@@ -25,7 +34,12 @@ import { ExercicioProvider } from '../providers/exercicio/exercicio';
     ExercicioPage,
     CriarTreinoPage,
     ListaExerciciosPage,
-
+    ListaAlunosPage,
+    MeusAlunosPage,
+    PerfilPage,
+    LoginPage,
+    TrocarSenhaPage,
+    
     AboutPage,
     ContactPage,
     TabsPage,
@@ -42,6 +56,11 @@ import { ExercicioProvider } from '../providers/exercicio/exercicio';
     ExercicioPage,
     CriarTreinoPage,
     ListaExerciciosPage,
+    ListaAlunosPage,
+    MeusAlunosPage,
+    PerfilPage,
+    LoginPage,
+    TrocarSenhaPage,
 
     AboutPage,
     ContactPage,
@@ -51,7 +70,10 @@ import { ExercicioProvider } from '../providers/exercicio/exercicio';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ExercicioProvider
+    ExercicioProvider,
+    UsuarioProvider,
+    PhotoViewer,
+    Camera,
   ]
 })
 export class AppModule {}

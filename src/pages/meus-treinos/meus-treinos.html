@@ -5,7 +5,14 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card *ngFor="let item of treinos" (click)="abrirTreino(item)">
+
+  <!-- Trocar condição do *ngIf para verificar a ocupação do usuário logado -->
+  <div *ngIf="user.ocupacao === 'Treinador'" text-center>
+    <img class="foto-perfil" src="./assets/imgs/profile-default.png"><br>
+    <span>{{ aluno.nome }}</span><br>
+  </div>
+
+  <ion-card *ngFor="let item of treinos" (tap)="abrirTreino(item)">
     <ion-card-content>
       <ion-card-title>{{ item.foco }}</ion-card-title>
       <p>Treinador: {{ item.treinador }}</p>

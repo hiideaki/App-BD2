@@ -16,18 +16,21 @@
 <ion-content padding>
   <h2 *ngIf="dados.foco"> {{ dados.foco }} </h2>
   <p *ngIf="dados.treinador"> Treinador: {{ dados.treinador }} </p>
+  <button ion-button color="primary" (tap)="addExercicio()" full>Adicionar exercício</button>
+  <br>
 
   <ion-card *ngFor="let grupo of listaView">
     <ion-card-header> {{ grupo.musculo }} </ion-card-header>
     <ion-list>
-      <button ion-item *ngFor="let item of grupo.exercicios" (click)="abrirExercicio(item, grupo.musculo)">
-          {{ item.nome }}: {{ item.carga }}kg ({{ item.series }}x{{ item.reps }})
-      </button>
+      <ion-item start *ngFor="let item of grupo.exercicios">
+        <span (tap)="abrirExercicio(item, grupo.musculo)">{{ item.nome }}: {{ item.carga }}kg ({{ item.series }}x{{ item.reps }})</span>
+        <button (tap)="more(item, grupo.musculo)" style="float: right; background: transparent;"><ion-icon name="more"></ion-icon></button>
+      </ion-item>
     </ion-list>
   </ion-card>
 
   <br>
   
-  <button ion-button color="primary" (click)="salvar()" full>Salvar</button>
+  <button ion-button color="primary" (tap)="salvar()" full>Salvar</button>
 
 </ion-content>

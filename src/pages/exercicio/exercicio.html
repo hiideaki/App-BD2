@@ -14,26 +14,29 @@
 
 
 <ion-content padding *ngIf="dados">
-  <div class="video" style="width: 100%; background: #ccc; height: 200px"></div>
+  <div class="video" style="width: 100%; background: #ddd; height: 200px"></div>
   <h4>{{ dados.nome }}</h4>
 
-  <ion-item>
-    <ion-label type="number" color="primary" stacked>Séries</ion-label>
-    <ion-input [(ngModel)]="series"></ion-input>
-  </ion-item>
+  <form #form="ngForm" (submit)="save()" novalidate>
+    <ion-item>
+      <ion-label color="primary" stacked>Séries</ion-label>
+      <ion-input type="number" name="series" [(ngModel)]="series" required></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label color="primary" stacked>Repetições</ion-label>
+      <ion-input type="number" name="reps" [(ngModel)]="reps" required></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label color="primary" stacked>Carga (kg)</ion-label>
+      <ion-input type="number" name="carga" [(ngModel)]="carga" required></ion-input>
+    </ion-item>
+  
+    <br>
+  
+    <button ion-button color="primary" type="submit" full>Salvar</button>
+    <button ion-button color="danger" (tap)="dismiss()" full>Cancelar</button>
+  </form>
 
-  <ion-item>
-    <ion-label type="number" color="primary" stacked>Repetições</ion-label>
-    <ion-input [(ngModel)]="reps"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label type="number" color="primary" stacked>Carga (kg)</ion-label>
-    <ion-input [(ngModel)]="carga"></ion-input>
-  </ion-item>
-
-  <br>
-
-  <button ion-button color="primary" (click)="dismiss(true)" full>Salvar</button>
-  <button ion-button color="danger" (click)="dismiss(false)" full>Cancelar</button>
 </ion-content>

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
-import { AboutPage } from '../about/about';
-import { ContactPage } from '../contact/contact';
 import { MeusTreinosPage } from '../meus-treinos/meus-treinos';
-import { CriarTreinoPage } from '../criar-treino/criar-treino';
+import { MeusAlunosPage } from '../meus-alunos/meus-alunos';
+import { PerfilPage } from '../perfil/perfil';
+import { UsuarioProvider } from '../../providers/usuario/usuario';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -11,10 +11,10 @@ import { CriarTreinoPage } from '../criar-treino/criar-treino';
 export class TabsPage {
 
   tab1Root = MeusTreinosPage;
-  tab2Root = CriarTreinoPage;
-  tab3Root = ContactPage;
+  tab2Root = MeusAlunosPage;
+  tab3Root = PerfilPage;
 
-  constructor() {
+  constructor(private user: UsuarioProvider) {
 
   }
 }

@@ -71,6 +71,13 @@ export class ListaExerciciosPage {
         carga: "",
         series: "",
         reps: ""
+      },
+      {
+        musculo: "Costas",
+        nome: "Cavalinho",
+        carga: "",
+        series: "",
+        reps: ""
       }
     ]
 
