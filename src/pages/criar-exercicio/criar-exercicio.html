@@ -1,0 +1,40 @@
+<!--
+  Generated template for the CriarExercicioPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Criar Exercício</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  
+  <button ion-button color="primary" type="button" (tap)="verVideo()" [disabled]="!this.videoSrc" full>Assistir vídeo</button>
+
+  <button ion-button color="primary" type="button" (tap)="selVideo()" full>Adicionar vídeo</button>
+
+  <br>
+
+  <form #form="ngForm" (submit)="save()" novalidate>
+    <ion-item>
+      <ion-label color="primary" stacked>Nome</ion-label>
+      <ion-input type="text" name="nome" [(ngModel)]="exercicio.nome" required></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label color="primary" stacked>Músculo</ion-label>
+      <ion-input type="text" name="musculo" [(ngModel)]="exercicio.musculo" required></ion-input>
+    </ion-item>
+    
+    <br>
+  
+    <button ion-button color="primary" type="submit" full>Salvar</button>
+    <button ion-button color="danger" (tap)="dismiss()" full>Cancelar</button>
+  </form>
+</ion-content>

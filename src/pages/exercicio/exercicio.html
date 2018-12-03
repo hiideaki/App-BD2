@@ -14,8 +14,10 @@
 
 
 <ion-content padding *ngIf="dados">
-  <div class="video" style="width: 100%; background: #ddd; height: 200px"></div>
+  
   <h4>{{ dados.nome }}</h4>
+  
+  <button ion-button color="primary" type="button" (tap)="verVideo()" *ngIf="this.videoSrc" full>Assistir vídeo</button>
 
   <form #form="ngForm" (submit)="save()" novalidate>
     <ion-item>

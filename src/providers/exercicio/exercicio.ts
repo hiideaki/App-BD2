@@ -1,7 +1,16 @@
 export class ExercicioProvider {
 
+  public video: string;
+  public nome: string;
+  public musculo: string;
+  public reps: string;
+  public series: string;
+  public carga: string;
 
   constructor() {
+    this.reps = "";
+    this.series = "";
+    this.carga = "";
   }
 
   organizaSaida(v: any[]) {

@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { Camera } from '@ionic-native/camera';
+import { StreamingMedia } from '@ionic-native/streaming-media';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -25,6 +26,7 @@ import { PerfilPage } from '../pages/perfil/perfil';
 import { UsuarioProvider } from '../providers/usuario/usuario';
 import { LoginPage } from '../pages/login/login';
 import { TrocarSenhaPage } from '../pages/trocar-senha/trocar-senha';
+import { CriarExercicioPage } from '../pages/criar-exercicio/criar-exercicio';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { TrocarSenhaPage } from '../pages/trocar-senha/trocar-senha';
     TreinoPage,
     ExercicioPage,
     CriarTreinoPage,
+    CriarExercicioPage,
     ListaExerciciosPage,
     ListaAlunosPage,
     MeusAlunosPage,
@@ -55,6 +58,7 @@ import { TrocarSenhaPage } from '../pages/trocar-senha/trocar-senha';
     TreinoPage,
     ExercicioPage,
     CriarTreinoPage,
+    CriarExercicioPage,
     ListaExerciciosPage,
     ListaAlunosPage,
     MeusAlunosPage,
@@ -74,6 +78,7 @@ import { TrocarSenhaPage } from '../pages/trocar-senha/trocar-senha';
     UsuarioProvider,
     PhotoViewer,
     Camera,
+    StreamingMedia,
   ]
 })
 export class AppModule {}

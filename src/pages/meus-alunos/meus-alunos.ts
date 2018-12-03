@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CriarTreinoPage } from '../criar-treino/criar-treino';
 import { ThrowStmt } from '@angular/compiler';
 import { MeusTreinosPage } from '../meus-treinos/meus-treinos';
+import { CriarExercicioPage } from '../criar-exercicio/criar-exercicio';
 
 /**
  * Generated class for the MeusAlunosPage page.
@@ -61,6 +62,10 @@ export class MeusAlunosPage {
 
   addTreino() {
     this.navCtrl.push(CriarTreinoPage);
+  }
+
+  addExercicio() {
+    this.navCtrl.push(CriarExercicioPage);
   }
 
 }

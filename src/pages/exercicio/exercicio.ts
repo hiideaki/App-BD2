@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
+import { StreamingVideoOptions, StreamingMedia } from '@ionic-native/streaming-media';
 
 /**
  * Generated class for the ExercicioPage page.
@@ -20,12 +21,18 @@ export class ExercicioPage {
 
   dados: any;
 
+  videoSrc: string;
+
   carga: any;
   reps: any;
   series: any;
   musculo: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController,
+     public navParams: NavParams,
+     public viewCtrl: ViewController, 
+     private toastCtrl: ToastController, 
+     private streamingMedia: StreamingMedia) {
     this.dados = navParams.data.item;
     this.carga = this.dados.carga;
     this.reps = this.dados.reps;
@@ -35,6 +42,16 @@ export class ExercicioPage {
   }
 
   ionViewDidLoad() {
+  }
+  
+  verVideo() {
+    let options: StreamingVideoOptions = {
+      successCallback: () => { console.log('Video played') },
+      errorCallback: (e) => { console.log('Error streaming') },
+      controls: true
+    };
+    
+    this.streamingMedia.playVideo(this.videoSrc, options);
   }
 
   save() {

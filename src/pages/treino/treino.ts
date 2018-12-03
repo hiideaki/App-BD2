@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController, ActionSheetContro
 import { ExercicioPage } from '../exercicio/exercicio';
 import { ExercicioProvider } from '../../providers/exercicio/exercicio';
 import { ListaExerciciosPage } from '../lista-exercicios/lista-exercicios';
+import { UsuarioProvider } from '../../providers/usuario/usuario';
 
 /**
  * Generated class for the TreinoPage page.
@@ -28,7 +29,8 @@ export class TreinoPage {
      public navParams: NavParams,
      private modalCtrl: ModalController,
      private asController: ActionSheetController,
-     private toastCtrl: ToastController) {
+     private toastCtrl: ToastController,
+     public user: UsuarioProvider) {
 
     this.dados = navParams.data;
 

@@ -33,6 +33,16 @@
   </ion-card>
 
   <ion-fab bottom right>
-    <button (tap)="addTreino()" ion-fab><ion-icon name="add"></ion-icon></button>
+    <button ion-fab><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab (tap)="addExercicio()">
+        <div class="label">Exercício</div>
+        <ion-icon name="trophy"></ion-icon>
+      </button>
+      <button ion-fab (tap)="addTreino()">
+        <div class="label">Treino</div>
+        <ion-icon name="fitness"></ion-icon>
+      </button>
+    </ion-fab-list>
   </ion-fab>
 </ion-content>
