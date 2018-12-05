@@ -23,4 +23,5 @@ export class Exercicios {
 
     @Column()
     series: string;
+    
 }

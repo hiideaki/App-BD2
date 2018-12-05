@@ -6,6 +6,7 @@ import { TrocarSenhaPage } from '../trocar-senha/trocar-senha';
 
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { DBServices } from '../../providers/database/database';
 
 /**
  * Generated class for the PerfilPage page.
@@ -23,8 +24,11 @@ export class PerfilPage {
 
   imgSrc: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private user: UsuarioProvider, private app: App, private photoViewer: PhotoViewer, private camera: Camera) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private user: UsuarioProvider, private app: App, private photoViewer: PhotoViewer, private camera: Camera, private dbServices: DBServices) {
     this.imgSrc = "./assets/imgs/profile-default.png"
+    if (this.user.foto){
+      this.imgSrc = this.user.foto;
+    }
   }
 
 
@@ -44,8 +48,11 @@ export class PerfilPage {
     }
 
     this.camera.getPicture(cameraOptions)
-    .then(file_uri => this.imgSrc = normalizeURL(file_uri), 
-    err => console.log(err));
+      .then(file_uri => {
+        this.imgSrc = normalizeURL(file_uri)
+        this.dbServices.setFoto(this.user.cpf, this.imgSrc, this.user.ocupacao);
+     }  
+    );
   }
 
   more() {
@@ -62,6 +69,8 @@ export class PerfilPage {
   }
 
   ionViewDidLoad() {
+    console.log(this.user);
+    
   }
 
 }

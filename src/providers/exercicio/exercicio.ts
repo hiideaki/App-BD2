@@ -23,7 +23,8 @@ export class ExercicioProvider {
             nome: item.nome,
             reps: item.reps,
             series: item.series,
-            carga: item.carga
+            carga: item.carga,
+            video: item.video
           }
         )
       } else {
@@ -35,7 +36,8 @@ export class ExercicioProvider {
               nome: item.nome,
               reps: item.reps,
               series: item.series,
-              carga: item.carga
+              carga: item.carga,
+              video: item.video
             }
           ]
         })

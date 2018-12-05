@@ -8,8 +8,18 @@
 
   <!-- Trocar condição do *ngIf para verificar a ocupação do usuário logado -->
   <div *ngIf="user.ocupacao === 'Treinador'" text-center>
-    <img class="foto-perfil" src="./assets/imgs/profile-default.png"><br>
+    <img class="foto-perfil" [src]="aluno.foto"><br>
     <span>{{ aluno.nome }}</span><br>
+  </div>
+
+  <div *ngIf="treinos.length == 0 && user.ocupacao != 'Treinador'" class="alerta">
+    <ion-icon name="warning"></ion-icon>
+    <h1 text-center>Você ainda não tem treinos criados</h1>
+  </div>
+
+  <div *ngIf="treinos.length == 0 && user.ocupacao === 'Treinador'" class="alerta alerta-treinador">
+    <ion-icon name="warning"></ion-icon>
+    <h1 text-center>Este aluno ainda não tem treinos criados com você</h1>
   </div>
 
   <ion-card *ngFor="let item of treinos" (tap)="abrirTreino(item)">

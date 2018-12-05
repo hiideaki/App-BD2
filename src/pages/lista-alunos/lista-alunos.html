@@ -27,7 +27,7 @@
     <ion-list>
       <ion-item *ngFor="let item of listaView" (tap)="setAluno(item)">
         <ion-avatar item-start>
-          <img src="./assets/imgs/profile-default.png"/>
+          <img [src]="item.foto"/>
         </ion-avatar>
         <h2>{{ item.nome }}</h2>
       </ion-item>

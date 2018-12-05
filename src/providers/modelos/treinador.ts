@@ -29,4 +29,7 @@ export class Treinadores {
 
     @OneToMany(type => Treinos, treinos => treinos.treinador, {cascade: true})
     treinos: Treinos[];
+
+    @Column({nullable: true})
+    foto: string;
 }

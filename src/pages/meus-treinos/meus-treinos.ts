@@ -19,17 +19,6 @@ export class MeusTreinosPage {
     
     this.aluno = navParams.data;
   
-    /*
-    this.treinos = [
-      {
-        foco: "Hipertrofia",
-        treinador: "Raul Tragante"
-      }, 
-      {
-        foco: "Emagrecimento",
-        treinador: "Bruno Belluzzo"
-      }
-    ]*/
   }
 
   ionViewDidLoad() {

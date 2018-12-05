@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
+import { UsuarioProvider } from '../../providers/usuario/usuario';
+import { DBServices } from '../../providers/database/database';
 
 /**
  * Generated class for the TrocarSenhaPage page.
@@ -22,7 +24,7 @@ export class TrocarSenhaPage {
   senhaNew: string;
   confSenhaNew: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, public user: UsuarioProvider, private dbServices: DBServices) {
   }
 
   ionViewDidLoad() {
@@ -41,7 +43,8 @@ export class TrocarSenhaPage {
       } else {
         
         // Verificar com a senha do banco de dados
-        if(this.senhaOld === "Senha123") {
+        if(this.senhaOld === this.user.senha) {
+          this.dbServices.trocaSenha(this.user.cpf, this.user.ocupacao, this.senhaNew);
           toast.setMessage("Senha alterada com sucesso!");
           toast.present();
           this.navCtrl.pop();

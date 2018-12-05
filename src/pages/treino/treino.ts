@@ -35,73 +35,18 @@ export class TreinoPage {
      private dbServices: DBServices) {
 
     this.dados = navParams.data;
-
-
-    // O objeto vindo do BD deve ser alterado (no front-end, possivelmente) para estar nesse formato:
-    /*
-    this.lista = [
-      {
-        musculo: "Perna",
-        nome: "Leg-press",
-        carga: "80",
-        series: "3",
-        reps: "12"
-      },
-      {
-        musculo: "Perna",
-        nome: "Adutora",
-        carga: "20",
-        series: "3",
-        reps: "12"
-      },
-      {
-        musculo: "Perna",
-        nome: "Mesa romana",
-        carga: "80",
-        series: "3",
-        reps: "10"
-      },
-      {
-        musculo: "Bíceps",
-        nome: "Rosca direta",
-        carga: "15",
-        series: "3",
-        reps: "12"
-      },
-      {
-        musculo: "Bíceps",
-        nome: "Rosca scotch",
-        carga: "10",
-        series: "3",
-        reps: "10"
-      },
-      {
-        musculo: "Costas",
-        nome: "Pulley alto inclinado",
-        carga: "30",
-        series: "3",
-        reps: "12"
-      },
-      {
-        musculo: "Costas",
-        nome: "Remada baixa",
-        carga: "45",
-        series: "3",
-        reps: "12"
-      }
-    ]
-    this.listaView = this.exercicios.organizaSaida(this.lista);*/
   }
 
   ionViewDidLoad() {    
     this.dbServices.getInfoTreino(this.dados.id, this.dados.aluno.nome).then(data => {
       data.exercicios.forEach(item => {
-        this.lista.push({id: item.id, musculo: item.exercicio.musculo, nome: item.exercicio.nome, carga: item.carga, series: item.series, reps: item.repeticoes})
+        this.lista.push({id: item.id, musculo: item.exercicio.musculo, nome: item.exercicio.nome, carga: item.carga, series: item.series, reps: item.repeticoes, video: item.exercicio.video})
+
+
       })
       
       this.listaView = this.exercicios.organizaSaida(this.lista);
-      console.log(this.listaView);
-      
+      console.log(this.listaView)
     })
   }
 
@@ -138,9 +83,6 @@ export class TreinoPage {
 
       // Verifica se a ação realizada no modal foi de salvar o exercício
       if(data.mudou) {
-        console.log(item);
-        
-        console.log(data);
         
         // Busca no vetor o exercício correspondente
         let aux = this.lista.find((j) => j.id === data.dados.id);
@@ -172,8 +114,6 @@ export class TreinoPage {
       position: 'bottom'
     })
     if(this.lista.length > 0) {
-      console.log("Salvar no BD");
-      console.log(this.lista);
       
       this.lista.forEach(dados => {
         console.log(dados);

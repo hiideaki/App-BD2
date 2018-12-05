@@ -27,7 +27,7 @@ export class ListaAlunosPage {
     this.dbServices.getAlunosAll().then(dados => {
       dados.forEach(data => {
         console.log(data);
-        this.lista.push({cpf: data.cpf, nome: data.nome})
+        this.lista.push({cpf: data.cpf, nome: data.nome, foto: data.foto})
       })
       this.listaView = this.lista.sort((a, b) => (a.nome < b.nome ? -1 : 1))
     })

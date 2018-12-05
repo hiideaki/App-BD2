@@ -10,7 +10,7 @@ export class Exercicio_Info{
     @Column()
     musculo: string;
 
-    @Column()
+    @Column({nullable: true})
     video: string;
 
     @OneToMany(type => Exercicios, exercicio => exercicio.exercicio)

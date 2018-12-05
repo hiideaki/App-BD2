@@ -40,7 +40,9 @@ export class ExercicioPage {
     this.series = this.dados.series;
     this.musculo = navParams.data.musculo;
     this.id = this.dados.id;
-
+    this.videoSrc = this.dados.video;
+    console.log(this.dados);
+    
   }
 
   ionViewDidLoad() {
@@ -53,7 +55,6 @@ export class ExercicioPage {
       errorCallback: (e) => { console.log('Error streaming') },
       controls: true
     };
-    
     this.streamingMedia.playVideo(this.videoSrc, options);
   }
 
@@ -63,7 +64,7 @@ export class ExercicioPage {
       position: "bottom"
     })
     if(this.form.form.valid) {
-      let dados = {id: this.id, musculo: this.musculo, nome: this.dados.nome, carga: this.carga, series: this.series, reps: this.reps }
+      let dados = {id: this.id, musculo: this.musculo, nome: this.dados.nome, carga: this.carga, series: this.series, reps: this.reps, video: this.dados.video }
       this.viewCtrl.dismiss({ mudou: true, dados });
       toast.setDuration(1000),
       toast.setMessage("Exercício salvo");

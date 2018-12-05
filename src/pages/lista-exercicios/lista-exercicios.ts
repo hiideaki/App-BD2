@@ -22,6 +22,8 @@ export class ListaExerciciosPage {
   private lista = [];
   private listaView: any;
 
+  private aux;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, private modalCtrl: ModalController, private dbServices: DBServices) {
     /*this.lista = [
       {
@@ -82,14 +84,11 @@ export class ListaExerciciosPage {
       }
     ]
 
-    let aux = navParams.data.lista
-    
-    if(aux.length > 0) {
-      this.lista = this.lista.filter((item) => !aux.some((i) => i.nome === item.nome))
-    }
 
-    this.listaView = this.exercicio.organizaSaida(this.lista)
     */
+   
+    this.aux = navParams.data.lista
+
   }
 
   ionViewDidLoad() {
@@ -97,6 +96,10 @@ export class ListaExerciciosPage {
       dados.forEach(data => {
         this.lista.push(data);
       })
+      
+      if(this.aux.length > 0) {
+        this.lista = this.lista.filter((item) => !this.aux.some((i) => i.nome === item.nome))
+      }
 
       this.listaView = this.exercicio.organizaSaida(this.lista)
     })

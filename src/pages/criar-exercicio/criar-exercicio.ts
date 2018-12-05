@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, normalizeURL } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, normalizeURL, ToastController } from 'ionic-angular';
 import { ExercicioProvider } from '../../providers/exercicio/exercicio';
 import { Camera } from '@ionic-native/camera';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
 import { DBServices } from '../../providers/database/database';
+import { NgForm } from '@angular/forms';
 
 /**
  * Generated class for the CriarExercicioPage page.
@@ -18,11 +19,12 @@ import { DBServices } from '../../providers/database/database';
   templateUrl: 'criar-exercicio.html',
 })
 export class CriarExercicioPage {
+  @ViewChild('form') form: NgForm;
 
   exercicio: ExercicioProvider = new ExercicioProvider()
   videoSrc: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private streamingMedia: StreamingMedia, private dbServices: DBServices) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private streamingMedia: StreamingMedia, private dbServices: DBServices, private toastCtrl: ToastController) {
     this.videoSrc = null;
   }
 
@@ -55,10 +57,24 @@ export class CriarExercicioPage {
   }
   
   save() {
-    if (!this.exercicio.video){
-      this.exercicio.video = 'Sem video';
+    
+    let toast = this.toastCtrl.create({
+      duration: 1000,
+      position: "bottom"
+    })
+    if(this.form.form.valid) {
+
+      this.dbServices.criaExercicio_Info(this.exercicio.nome, this.exercicio.musculo, this.videoSrc);
+      
+      toast.setMessage("Exercício criado com sucesso");
+      toast.present();
+
+      this.navCtrl.pop();
+    } else {
+      toast.setMessage("Preencha todos os campos");
+      toast.present();
     }
-    this.dbServices.criaExercicio_Info(this.exercicio.nome, this.exercicio.musculo, this.exercicio.video);
+    
   }
 
   dismiss() {

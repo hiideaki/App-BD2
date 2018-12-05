@@ -30,6 +30,7 @@ export class CriarTreinoPage {
   private exercicios: ExercicioProvider = new ExercicioProvider();
   private lista = [];
   private listaView: any;
+  private treinoidaux = null;
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams, 
@@ -115,9 +116,12 @@ export class CriarTreinoPage {
     console.log(this.lista)
 
     if(this.form.form.valid && this.lista.length > 0 && this.aluno) {
-      this.lista.forEach(data => {
-        this.dbServices.CriaTreino(this.aluno, this.user.nome, data.nome, data.carga, data.reps, data.series, null, this.foco)
-      })
+      this.dbServices.CriaTreino(this.aluno, this.user.nome, this.lista[0].nome, this.lista[0].carga, this.lista[0].reps, this.lista[0].series, this.treinoidaux, this.foco)
+        .then(id => {
+          for(let i = 1; i < this.lista.length; i++) {
+            this.dbServices.CriaTreino(this.aluno, this.user.nome, this.lista[i].nome, this.lista[i].carga, this.lista[i].reps, this.lista[i].series, id, this.foco)
+          }
+        })
       
       toast.setMessage("Treino criado!");
       toast.present();

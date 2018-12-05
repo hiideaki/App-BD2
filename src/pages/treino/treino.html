@@ -24,13 +24,13 @@
     <ion-list>
       <ion-item start *ngFor="let item of grupo.exercicios">
         <span (tap)="abrirExercicio(item, grupo.musculo)">{{ item.nome }}: {{ item.carga }}kg ({{ item.series }}x{{ item.reps }})</span>
-        <button (click)="more(item)" style="float: right; background: transparent;"><ion-icon name="more"></ion-icon></button>
+        <button (click)="more(item)" style="float: right; background: transparent;" *ngIf="user.ocupacao === 'Treinador'"><ion-icon name="more"></ion-icon></button>
       </ion-item>
     </ion-list>
   </ion-card>
 
   <br>
   
-  <button ion-button color="primary" (tap)="salvar()" *ngIf="user.ocupacao === 'Treinador'" full>Salvar</button>
+  <button ion-button color="primary" (tap)="salvar()" full>Salvar</button>
 
 </ion-content>
