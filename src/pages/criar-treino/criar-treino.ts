@@ -5,6 +5,8 @@ import { ExercicioProvider } from '../../providers/exercicio/exercicio';
 import { ListaAlunosPage } from '../lista-alunos/lista-alunos';
 import { ExercicioPage } from '../exercicio/exercicio';
 import { NgForm } from '@angular/forms';
+import { DBServices } from '../../providers/database/database';
+import { UsuarioProvider } from '../../providers/usuario/usuario';
 
 /**
  * Generated class for the CriarTreinoPage page.
@@ -26,14 +28,16 @@ export class CriarTreinoPage {
   aluno: any;
 
   private exercicios: ExercicioProvider = new ExercicioProvider();
-  private lista: any;
+  private lista = [];
   private listaView: any;
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams, 
      private modalCtrl: ModalController, 
      private asController: ActionSheetController,
-     private toastCtrl: ToastController) {
+     private toastCtrl: ToastController,
+     public user: UsuarioProvider,
+     private dbServices: DBServices) {
     this.lista = [];
   }
 
@@ -108,7 +112,13 @@ export class CriarTreinoPage {
       position: 'bottom'
     })
 
+    console.log(this.lista)
+
     if(this.form.form.valid && this.lista.length > 0 && this.aluno) {
+      this.lista.forEach(data => {
+        this.dbServices.CriaTreino(this.aluno, this.user.nome, data.nome, data.carga, data.reps, data.series, null, this.foco)
+      })
+      
       toast.setMessage("Treino criado!");
       toast.present();
       this.navCtrl.pop();

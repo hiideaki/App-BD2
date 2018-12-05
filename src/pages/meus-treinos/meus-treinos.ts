@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TreinoPage } from '../treino/treino';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
+import { DBServices } from '../../providers/database/database';
 
 
 @IonicPage()
@@ -11,13 +12,14 @@ import { UsuarioProvider } from '../../providers/usuario/usuario';
 })
 export class MeusTreinosPage {
 
-  treinos: any;
+  treinos = [];
   aluno: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private user: UsuarioProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private user: UsuarioProvider, private dbServices: DBServices) {
     
     this.aluno = navParams.data;
-    
+  
+    /*
     this.treinos = [
       {
         foco: "Hipertrofia",
@@ -27,10 +29,26 @@ export class MeusTreinosPage {
         foco: "Emagrecimento",
         treinador: "Bruno Belluzzo"
       }
-    ]
+    ]*/
   }
 
   ionViewDidLoad() {
+    if (this.aluno.nome){
+      this.dbServices.getTreinos(this.aluno.nome).then(dados => {
+        
+        dados.forEach(data => {
+          this.treinos.push(data);
+        })
+      });
+    }
+    else {
+      this.dbServices.getTreinos(this.user.nome).then(dados => {
+        
+        dados.forEach(data => {
+          this.treinos.push(data);
+        })
+      }); 
+    }
   }
 
   

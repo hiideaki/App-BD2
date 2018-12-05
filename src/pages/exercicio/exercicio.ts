@@ -27,6 +27,7 @@ export class ExercicioPage {
   reps: any;
   series: any;
   musculo: any;
+  id: any;
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
@@ -38,10 +39,12 @@ export class ExercicioPage {
     this.reps = this.dados.reps;
     this.series = this.dados.series;
     this.musculo = navParams.data.musculo;
+    this.id = this.dados.id;
 
   }
 
   ionViewDidLoad() {
+    
   }
   
   verVideo() {
@@ -60,7 +63,7 @@ export class ExercicioPage {
       position: "bottom"
     })
     if(this.form.form.valid) {
-      let dados = { musculo: this.musculo, nome: this.dados.nome, carga: this.carga, series: this.series, reps: this.reps }
+      let dados = {id: this.id, musculo: this.musculo, nome: this.dados.nome, carga: this.carga, series: this.series, reps: this.reps }
       this.viewCtrl.dismiss({ mudou: true, dados });
       toast.setDuration(1000),
       toast.setMessage("Exercício salvo");

@@ -12,7 +12,7 @@ export class UsuarioProvider {
   public complemento: string;
 
   public plano: string;
-  public valor: string;
+  public valor: number;
   public vencimento: string;
 
 

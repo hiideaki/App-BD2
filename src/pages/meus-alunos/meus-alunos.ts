@@ -4,6 +4,7 @@ import { CriarTreinoPage } from '../criar-treino/criar-treino';
 import { ThrowStmt } from '@angular/compiler';
 import { MeusTreinosPage } from '../meus-treinos/meus-treinos';
 import { CriarExercicioPage } from '../criar-exercicio/criar-exercicio';
+import { DBServices } from '../../providers/database/database';
 
 /**
  * Generated class for the MeusAlunosPage page.
@@ -20,11 +21,11 @@ import { CriarExercicioPage } from '../criar-exercicio/criar-exercicio';
 export class MeusAlunosPage {
 
   myInput: string;
-  lista: any;
+  lista = [];
   listaView: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.lista = [
+  constructor(public navCtrl: NavController, public navParams: NavParams, private dbServices: DBServices) {
+    /*this.lista = [
       {
         nome: "Marcelo Hideaki Iwata Kito"
       },
@@ -42,7 +43,7 @@ export class MeusAlunosPage {
       }
     ]
 
-    this.listaView = this.lista.sort((a, b) => (a.nome < b.nome ? -1 : 1))
+    this.listaView = this.lista.sort((a, b) => (a.nome < b.nome ? -1 : 1))*/
   }
   
   onInput() {
@@ -53,7 +54,13 @@ export class MeusAlunosPage {
   }
 
   ionViewDidLoad() {
-    
+    //this.dbServices.getUser('brino@email.com', 'senha123');
+    this.dbServices.getAlunosAll().then(dados => {
+      dados.forEach(data => {
+        this.lista.push({nome: data.nome})
+      })
+      this.listaView = this.lista.sort((a, b) => (a.nome < b.nome ? -1 : 1))
+    })
   }
 
   getAluno(item) {

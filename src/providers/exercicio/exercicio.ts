@@ -19,6 +19,7 @@ export class ExercicioProvider {
       if(saida.some((i) => i.musculo === item.musculo)) {
         saida.find((i) => i.musculo === item.musculo).exercicios.push(
           {
+            id: item.id,
             nome: item.nome,
             reps: item.reps,
             series: item.series,
@@ -30,6 +31,7 @@ export class ExercicioProvider {
           musculo: item.musculo,
           exercicios: [
             {
+              id: item.id,
               nome: item.nome,
               reps: item.reps,
               series: item.series,

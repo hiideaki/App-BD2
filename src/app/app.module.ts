@@ -27,6 +27,7 @@ import { UsuarioProvider } from '../providers/usuario/usuario';
 import { LoginPage } from '../pages/login/login';
 import { TrocarSenhaPage } from '../pages/trocar-senha/trocar-senha';
 import { CriarExercicioPage } from '../pages/criar-exercicio/criar-exercicio';
+import { DBServices } from '../providers/database/database';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { CriarExercicioPage } from '../pages/criar-exercicio/criar-exercicio';
     PhotoViewer,
     Camera,
     StreamingMedia,
+    DBServices,
   ]
 })
 export class AppModule {}

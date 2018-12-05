@@ -15,7 +15,7 @@
   <ion-card *ngFor="let item of treinos" (tap)="abrirTreino(item)">
     <ion-card-content>
       <ion-card-title>{{ item.foco }}</ion-card-title>
-      <p>Treinador: {{ item.treinador }}</p>
+      <p>Treinador: {{ item.treinador.nome }}</p>
     </ion-card-content>
   </ion-card>
 </ion-content>

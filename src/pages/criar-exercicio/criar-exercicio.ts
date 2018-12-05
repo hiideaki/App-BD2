@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, normalizeURL } from 'ionic-angular
 import { ExercicioProvider } from '../../providers/exercicio/exercicio';
 import { Camera } from '@ionic-native/camera';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
+import { DBServices } from '../../providers/database/database';
 
 /**
  * Generated class for the CriarExercicioPage page.
@@ -21,7 +22,7 @@ export class CriarExercicioPage {
   exercicio: ExercicioProvider = new ExercicioProvider()
   videoSrc: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private streamingMedia: StreamingMedia) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private streamingMedia: StreamingMedia, private dbServices: DBServices) {
     this.videoSrc = null;
   }
 
@@ -54,7 +55,10 @@ export class CriarExercicioPage {
   }
   
   save() {
-
+    if (!this.exercicio.video){
+      this.exercicio.video = 'Sem video';
+    }
+    this.dbServices.criaExercicio_Info(this.exercicio.nome, this.exercicio.musculo, this.exercicio.video);
   }
 
   dismiss() {

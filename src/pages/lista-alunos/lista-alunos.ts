@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { DBServices } from '../../providers/database/database'
 
 /**
  * Generated class for the ListaAlunosPage page.
@@ -15,34 +16,21 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 })
 export class ListaAlunosPage {
 
-  lista: any;
+  lista = [];
   listaView: any;
   myInput: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController) {
-    this.lista = [
-      {
-        nome: "Marcelo Hideaki Iwata Kito"
-      },
-      {
-        nome: "Bruno Belluzzo"
-      },
-      {
-        nome: "Vitor de Souza Cruzeiro"
-      },
-      {
-        nome: "Paulo Eduardo Manzone Maia"
-      },
-      {
-        nome: "Gabriel Góis"
-      }
-    ]
-
-    this.listaView = this.lista.sort((a, b) => (a.nome < b.nome ? -1 : 1))
-    
+  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, private dbServices: DBServices) {
   }
 
   ionViewDidLoad() {
+    this.dbServices.getAlunosAll().then(dados => {
+      dados.forEach(data => {
+        console.log(data);
+        this.lista.push({cpf: data.cpf, nome: data.nome})
+      })
+      this.listaView = this.lista.sort((a, b) => (a.nome < b.nome ? -1 : 1))
+    })
   }
   
   onInput() {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
 import { ExercicioProvider } from '../../providers/exercicio/exercicio';
 import { ExercicioPage } from '../exercicio/exercicio';
+import { DBServices } from '../../providers/database/database';
 
 /**
  * Generated class for the ListaExerciciosPage page.
@@ -18,11 +19,11 @@ import { ExercicioPage } from '../exercicio/exercicio';
 export class ListaExerciciosPage {
 
   private exercicio: ExercicioProvider = new ExercicioProvider();
-  private lista: any;
+  private lista = [];
   private listaView: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, private modalCtrl: ModalController) {
-    this.lista = [
+  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, private modalCtrl: ModalController, private dbServices: DBServices) {
+    /*this.lista = [
       {
         musculo: "Perna",
         nome: "Leg-press",
@@ -88,10 +89,17 @@ export class ListaExerciciosPage {
     }
 
     this.listaView = this.exercicio.organizaSaida(this.lista)
-
+    */
   }
 
   ionViewDidLoad() {
+    this.dbServices.getListaExercicios_Info().then(dados => {
+      dados.forEach(data => {
+        this.lista.push(data);
+      })
+
+      this.listaView = this.exercicio.organizaSaida(this.lista)
+    })
   }
 
 

@@ -4,6 +4,7 @@ import { ExercicioPage } from '../exercicio/exercicio';
 import { ExercicioProvider } from '../../providers/exercicio/exercicio';
 import { ListaExerciciosPage } from '../lista-exercicios/lista-exercicios';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
+import { DBServices } from '../../providers/database/database';
 
 /**
  * Generated class for the TreinoPage page.
@@ -22,7 +23,7 @@ export class TreinoPage {
   dados: any;
 
   exercicios: ExercicioProvider = new ExercicioProvider();
-  lista: any;
+  lista = [];
   listaView: any;
 
   constructor(public navCtrl: NavController,
@@ -30,12 +31,14 @@ export class TreinoPage {
      private modalCtrl: ModalController,
      private asController: ActionSheetController,
      private toastCtrl: ToastController,
-     public user: UsuarioProvider) {
+     public user: UsuarioProvider,
+     private dbServices: DBServices) {
 
     this.dados = navParams.data;
 
 
     // O objeto vindo do BD deve ser alterado (no front-end, possivelmente) para estar nesse formato:
+    /*
     this.lista = [
       {
         musculo: "Perna",
@@ -87,10 +90,25 @@ export class TreinoPage {
         reps: "12"
       }
     ]
-    this.listaView = this.exercicios.organizaSaida(this.lista);
+    this.listaView = this.exercicios.organizaSaida(this.lista);*/
   }
 
+  ionViewDidLoad() {    
+    this.dbServices.getInfoTreino(this.dados.id, this.dados.aluno.nome).then(data => {
+      data.exercicios.forEach(item => {
+        this.lista.push({id: item.id, musculo: item.exercicio.musculo, nome: item.exercicio.nome, carga: item.carga, series: item.series, reps: item.repeticoes})
+      })
+      
+      this.listaView = this.exercicios.organizaSaida(this.lista);
+      console.log(this.listaView);
+      
+    })
+  }
+
+
   more(item) {
+    
+    
     let toast = this.toastCtrl.create({
       duration: 1000,
       position: 'bottom',
@@ -102,8 +120,10 @@ export class TreinoPage {
           text: 'Remover',
           role: 'destructive',
           handler: () => {
+            this.dbServices.destroiExercicio(this.lista[this.lista.findIndex((i) => i.nome === item.nome)].id);
             this.lista.splice(this.lista.findIndex((i) => i.nome === item.nome), 1);
             this.listaView = this.exercicios.organizaSaida(this.lista)
+            
             toast.present();
           }
         }
@@ -118,12 +138,17 @@ export class TreinoPage {
 
       // Verifica se a ação realizada no modal foi de salvar o exercício
       if(data.mudou) {
+        console.log(item);
+        
+        console.log(data);
         
         // Busca no vetor o exercício correspondente
-        let aux = this.listaView.find((i) => i.musculo === data.dados.musculo).exercicios.find((j) => j.nome === data.dados.nome)
+        let aux = this.lista.find((j) => j.id === data.dados.id);
+
         aux.carga = data.dados.carga;
         aux.reps = data.dados.reps;
         aux.series = data.dados.series;
+        this.listaView = this.exercicios.organizaSaida(this.lista);
       }
     })
     modal.present();
@@ -148,6 +173,12 @@ export class TreinoPage {
     })
     if(this.lista.length > 0) {
       console.log("Salvar no BD");
+      console.log(this.lista);
+      
+      this.lista.forEach(dados => {
+        console.log(dados);
+        this.dbServices.CriaTreino(this.dados.aluno.nome, this.dados.treinador.nome, dados.nome, dados.carga, dados.reps, dados.series, this.dados.id, null, dados.id);
+      })
       toast.setMessage("Treino salvo!");
       toast.present();
       this.navCtrl.pop();

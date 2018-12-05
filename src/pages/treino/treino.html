@@ -15,7 +15,7 @@
 
 <ion-content padding>
   <h2 *ngIf="dados.foco"> {{ dados.foco }} </h2>
-  <p *ngIf="dados.treinador"> Treinador: {{ dados.treinador }} </p>
+  <p *ngIf="dados.treinador"> Treinador: {{ dados.treinador.nome }} </p>
   <button ion-button color="primary" (tap)="addExercicio()" *ngIf="user.ocupacao === 'Treinador'" full>Adicionar exercício</button>
   <br>
 
@@ -24,7 +24,7 @@
     <ion-list>
       <ion-item start *ngFor="let item of grupo.exercicios">
         <span (tap)="abrirExercicio(item, grupo.musculo)">{{ item.nome }}: {{ item.carga }}kg ({{ item.series }}x{{ item.reps }})</span>
-        <button (tap)="more(item, grupo.musculo)" style="float: right; background: transparent;"><ion-icon name="more"></ion-icon></button>
+        <button (click)="more(item)" style="float: right; background: transparent;"><ion-icon name="more"></ion-icon></button>
       </ion-item>
     </ion-list>
   </ion-card>
